@@ -3,6 +3,7 @@
  */
 package ProgramacionIII.Practico2.ejemplos;
 
+import ProgramacionIII.util.Util;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class Recursion02 {
      * @param b
      * @return a + b
      */
-     private int suma(int a, int b) {
+     public int suma(int a, int b) {
         if (b == 0) {
             return a;
         } else if (a == 0) {
@@ -45,13 +46,6 @@ public class Recursion02 {
         
         System.out.println("Tiempo de Ejecución: " + (v_end.getTime() - v_start.getTime()));
      }
-     /**
-      * Genera un valor aleatorio
-      * @return valor entero
-      */
-     public int generarValor() {
-         return (int)(Math.random()*1000);
-     }
      
     /**
      * arguments
@@ -59,12 +53,12 @@ public class Recursion02 {
     public static void main(String[] args) {
        
         Recursion02 v_rec = new Recursion02();
+        int v_valor_max = 1000;
+        v_rec.test(Util.generarValor(v_valor_max), Util.generarValor(v_valor_max));
         
-        v_rec.test(v_rec.generarValor(), v_rec.generarValor());
+        v_rec.test(Util.generarValor(v_valor_max), Util.generarValor(v_valor_max));
         
-        v_rec.test(v_rec.generarValor(), v_rec.generarValor());
-        
-        v_rec.test(v_rec.generarValor(), v_rec.generarValor());
+        v_rec.test(Util.generarValor(v_valor_max), Util.generarValor(v_valor_max));
     }
     
 }
