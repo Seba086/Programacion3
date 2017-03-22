@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Programación III - Ejemplo Recursión
  */
 package ProgramacionIII.Practico2.ejemplos;
 
@@ -10,7 +8,7 @@ import ProgramacionIII.util.Util;
 
 /**
  *
- * @author mfernandez
+* @author Mariano A. Fernandez <fernandez.mariano.a@gmail.com>
  */
 public class Recursion06 extends Recursion02 {
 

@@ -29,7 +29,22 @@ public class LineChart extends JFrame {
         // This will create the dataset
         XYDataset dataset = createDataset(p_valores);
         // based on the dataset we create the chart
-        JFreeChart chart = createChart(dataset, p_chartTitle);
+        JFreeChart chart = createChart(dataset, p_chartTitle, false);
+        // we put the chart into a panel
+        ChartPanel chartPanel = new ChartPanel(chart);
+        // default size
+        chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
+        // add it to our application
+        setContentPane(chartPanel);
+
+    }
+    
+    public LineChart(String p_applicationTitle, String p_chartTitle, int[][] p_valores) {
+        super(p_applicationTitle);
+        // This will create the dataset
+        XYDataset dataset = createDataset(p_valores);
+        // based on the dataset we create the chart
+        JFreeChart chart = createChart(dataset, p_chartTitle, true);
         // we put the chart into a panel
         ChartPanel chartPanel = new ChartPanel(chart);
         // default size
@@ -41,15 +56,27 @@ public class LineChart extends JFrame {
 
     private XYDataset createDataset(int[] p_valores) {
         XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series1 = new XYSeries("First");
-        for(int v_idx=0; v_idx<p_valores.length; v_idx++) {
-            series1.add(v_idx, p_valores[v_idx]);
-        }
-        dataset.addSeries(series1);
+        dataset.addSeries(this.createSerie("Default", p_valores));
         return dataset;
     }
+    
+    private XYDataset createDataset(int[][] p_valores) {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        for(int v_idx=0; v_idx < p_valores.length; v_idx++) {
+            dataset.addSeries(this.createSerie("Serie " + v_idx, p_valores[v_idx]));
+        }
+        return dataset;
+    }
+    
+    private XYSeries createSerie(String v_label, int[] p_valores) {
+        XYSeries v_serie = new XYSeries(v_label);
+        for(int v_idx=0; v_idx<p_valores.length; v_idx++) {
+            v_serie.add(v_idx, p_valores[v_idx]);
+        }
+        return v_serie;
+    }
 
-    private JFreeChart createChart(XYDataset dataset, String title) {
+    private JFreeChart createChart(XYDataset dataset, String title, boolean p_incl_legend) {
 
         JFreeChart chart = ChartFactory.createXYLineChart(
                 title, // chart title
@@ -57,7 +84,7 @@ public class LineChart extends JFrame {
                 "miliseg.",
                 dataset, // data
                 PlotOrientation.VERTICAL,
-                false, // include legend
+                p_incl_legend, // include legend
                 true,
                 false
         );

@@ -16,4 +16,8 @@ public class Util {
      public static int generarValor(int p_valor_maximo) {
          return (int)(Math.random()*p_valor_maximo);
      }
+     
+     public static int generarValor(int p_valor_minimo, int p_valor_maximo) {
+         return p_valor_minimo + (int)(Math.random()*(p_valor_maximo - p_valor_minimo));
+     }
 }
